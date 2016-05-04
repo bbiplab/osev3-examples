@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Application {
 
+	private static String envValue;
+	
 	@RequestMapping("/")
 	public String home() {
-		return "Hello Docker World, Environment - " + System.getProperty("environmentParam");
+		return "Hello Docker World, Environment - " + envValue;
 	}
 
 
 	public static void main(String[] args) {
+		if (args != null && args.length > 0) {
+			envValue = args[0];
+		}
 		SpringApplication.run(Application.class, args);
 	}
 
